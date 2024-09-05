@@ -1,5 +1,8 @@
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
+using namespace std;
 int main(void)
 {
     GLFWwindow* window;
@@ -19,11 +22,20 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    /* Loop until the user closes the window */
+    if(!gladLoadGL())
+	{
+		cout<<"GLAD !load"<<endl;
+		return -1;
+	}
+	cout<<"OpenGL "<<GLVersion.major<<"."<<GLVersion.minor<<endl; 
+	
+	glClearColor(0,1,0,1); // Добавляем зеленый свет в буфер света
+	
+  
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-       // glClear(GL_COLOR_BUFFER_BIT);
+        /* Заливка буфера света */
+        glClear(GL_COLOR_BUFFER_BIT);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
